@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="bank"></dbname>
+    <version value='2'></version>
+    <list>
+        <mapping class="com.example.lc.computer.OC"></mapping>
+        <mapping class="com.example.lc.computer.MC"></mapping>
+    </list>
+</litepal>
