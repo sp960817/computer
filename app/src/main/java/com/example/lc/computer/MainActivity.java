@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         m_grade=0;
         j_grade=0;
         g_drade=0;
-
         setContentView(R.layout.activity_main);
         Intent intent =getIntent();
         id =intent.getStringExtra("id_e");
@@ -59,6 +58,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public int getO_grade(){
         return o_grade;
     }
+
+    public void setM_grade(int m_grade) {
+        this.m_grade = m_grade;
+    }
+
+    public int getM_grade() {
+        return m_grade;
+    }
+
+    public int getJ_grade() {
+        return j_grade;
+    }
+
+    public void setJ_grade(int j_grade) {
+        this.j_grade = j_grade;
+    }
+
     @Override
     public void onClick(View v) {
 

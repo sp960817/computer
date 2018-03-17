@@ -55,6 +55,8 @@ public class FirstFragment extends Fragment {
                 DataSupport.deleteAll(MC.class);
                 getOC();
                 getMC();
+                getJUDGE();
+                getGapfilling();
                 ((MainActivity)getActivity()).Changefragment(new OnlyChooseFragement());
             }
         });
@@ -70,9 +72,8 @@ public class FirstFragment extends Fragment {
                 Log.d("sss",Integer.toString(nu[i]));
             }
             OC oc =new OC();
-            int i=0;
             for(int j=0;j<5;j++){
-                resultSet =statement.executeQuery("SELECT * FROM only_choose WHERE id = '"+nu[i]+"'");
+                resultSet =statement.executeQuery("SELECT * FROM only_choose WHERE id = '"+nu[j]+"'");
                 if (resultSet.next()){
                     a_subject =resultSet.getString("subject");
                     a_A =resultSet.getString("A");
@@ -90,7 +91,6 @@ public class FirstFragment extends Fragment {
                 oc.setAnswer(a_answer);
                 oc.save();
                 oc.clearSavedState();
-                i++;
                 Log.d("sss", "增加题"+nu[j]);
 
             }
@@ -99,18 +99,38 @@ public class FirstFragment extends Fragment {
 
         }
     }
+    //获取判断题
+    private void getJUDGE(){
+        String a_subject =null,a_answer=null;
+        connection =SqlHelper.openConnection();
+        try {
+            JUDGE judge =new JUDGE();
+            statement =connection.createStatement();
+            for(int j = 0; j<5;j++){
+                resultSet =statement.executeQuery("SELECT * FROM judge WHERE id = '"+nu[j]+"'");
+                if(resultSet.next()){
+                    a_subject=resultSet.getString("subject");
+                    a_answer =resultSet.getString("answer");
+                }
+                judge.setIdid(j+1);
+                judge.setSubject(a_subject);
+                judge.setAnswer(a_answer);
+                judge.save();
+                judge.clearSavedState();
+            }
+        }catch (SQLException e){
+
+        }
+    }
+    //获取多选题
     private void getMC(){
         String a_subject=null,a_A = null,a_B=null,a_C=null,a_D=null,a_answer=null;
         connection = SqlHelper.openConnection();
         try {
             MC mc =new MC();
             statement =connection.createStatement();
-            for(int i=0;i<5;i++){
-                Log.d("sss",Integer.toString(nu[i]));
-            }
-            int i=0;
             for(int j=0;j<5;j++){
-                resultSet =statement.executeQuery("SELECT * FROM many_choose WHERE id = '"+nu[i]+"'");
+                resultSet =statement.executeQuery("SELECT * FROM many_choose WHERE id = '"+nu[j]+"'");
                 if (resultSet.next()){
                     a_subject =resultSet.getString("subject");
                     a_A =resultSet.getString("A");
@@ -128,7 +148,28 @@ public class FirstFragment extends Fragment {
                 mc.setAnswer(a_answer);
                 mc.save();
                 mc.clearSavedState();
-                i++;
+            }
+        }catch (SQLException e){
+
+        }
+    }
+    private void getGapfilling(){
+        String a_subject =null,a_answer=null;
+        connection =SqlHelper.openConnection();
+        try {
+            GAPFILLING gapfilling =new GAPFILLING();
+            statement =connection.createStatement();
+            for(int j = 0; j<5;j++){
+                resultSet =statement.executeQuery("SELECT * FROM gapfilling WHERE id = '"+nu[j]+"'");
+                if(resultSet.next()){
+                    a_subject=resultSet.getString("subject");
+                    a_answer =resultSet.getString("answer");
+                }
+                gapfilling.setIdid(j+1);
+                gapfilling.setSubject(a_subject);
+                gapfilling.setAnswer(a_answer);
+                gapfilling.save();
+                gapfilling.clearSavedState();
             }
         }catch (SQLException e){
 

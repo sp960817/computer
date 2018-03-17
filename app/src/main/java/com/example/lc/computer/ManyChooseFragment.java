@@ -1,5 +1,6 @@
 package com.example.lc.computer;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class ManyChooseFragment extends Fragment {
         grade=0;
         List<MC> mcs = DataSupport.where("idid = ?","1").find(MC.class);
         for(MC mc:mcs){
-            subject.setText(mc.getSubject());
+            subject.setText("1."+mc.getSubject());
             A.setText(mc.getA());
             B.setText(mc.getB());
             C.setText(mc.getC());
@@ -131,7 +132,7 @@ public class ManyChooseFragment extends Fragment {
                         }
                         List<MC> mcs = DataSupport.where("idid = ?",""+i+"").find(MC.class);
                         for(MC mc:mcs){
-                            subject.setText(mc.getSubject());
+                            subject.setText(i+"."+mc.getSubject());
                             A.setText(mc.getA());
                             B.setText(mc.getB());
                             C.setText(mc.getC());
@@ -148,9 +149,9 @@ public class ManyChooseFragment extends Fragment {
                     } else {
                         Toast.makeText(getContext(), "回答错误", Toast.LENGTH_SHORT).show();
                     }
-                    ((MainActivity) getActivity()).setO_grade(grade);
-                    Toast.makeText(getContext(),"12121212",Toast.LENGTH_SHORT).show();
-                    Log.d("sss", Integer.toString(((MainActivity) getActivity()).getO_grade()));
+                    ((MainActivity) getActivity()).setM_grade(grade);
+                    ((MainActivity)getActivity()).Changefragment(new JudgeFragment());
+                    Log.d("sss", Integer.toString(((MainActivity) getActivity()).getM_grade()));
                 }
 
             }
