@@ -16,14 +16,14 @@ import org.litepal.crud.DataSupport;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     String name;
     String id ;
-    int o_grade,m_grade,j_grade,g_drade;
+    int o_grade,m_grade,j_grade,g_grade;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         o_grade=0;
         m_grade=0;
         j_grade=0;
-        g_drade=0;
+        g_grade=0;
         setContentView(R.layout.activity_main);
         Intent intent =getIntent();
         id =intent.getStringExtra("id_e");
@@ -78,5 +78,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+    }
+    public int getG_grade() {
+        return g_grade;
+    }
+    public void setG_grade(int g_grade) {
+        this.g_grade = g_grade;
+    }
+    public int getAllgrade(){
+        int allgrage =g_grade+j_grade+m_grade+o_grade;
+        return allgrage;
     }
 }

@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Toolbar toolbar =(Toolbar)findViewById(R.id.toobar);
+        toolbar.setTitle("登录");
         setSupportActionBar(toolbar);
 
         intview();

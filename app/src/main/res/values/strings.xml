@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">computer</string>
+    <string name="app_name">大学生电脑水平测试</string>
     <string name="title_activity_login2">Sign in</string>
 
     <!-- Strings related to login -->

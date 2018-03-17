@@ -70,9 +70,9 @@ public class GapfillingFragment extends Fragment {
                         Toast.makeText(getContext(), "回答错误", Toast.LENGTH_SHORT).show();
                         seleanswer.setText("");
                     }
-                    ((MainActivity)getActivity()).setJ_grade(grade1);
-                    ((MainActivity)getActivity()).Changefragment(new GapfillingFragment());
-                    Log.d("sss", Integer.toString(((MainActivity)getActivity()).getJ_grade()));
+                    ((MainActivity)getActivity()).setG_grade(grade1);
+                    ((MainActivity)getActivity()).Changefragment(new FinishFragment());
+                    Log.d("sss", Integer.toString(((MainActivity)getActivity()).getG_grade()));
                 }
             }
         });
