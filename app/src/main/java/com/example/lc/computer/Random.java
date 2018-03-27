@@ -4,7 +4,7 @@ package com.example.lc.computer;
  * Created by sp on 2018/3/12.
  */
 
-public class Random {
+public class Random {//随机生成数组
     public static int[] randomCommon(int min, int max, int n){
         if (n > (max - min + 1) || max < min) {
             return null;

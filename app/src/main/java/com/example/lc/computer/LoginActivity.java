@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ResultSet resultSet;
     Statement statement;
     private static final int ok=1,nopw=2,noname=3;
+    //更新ui
     private Handler handler =new Handler() {
         public void handleMessage(Message message) {
             switch (message.what) {
@@ -48,11 +49,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Toolbar toolbar =(Toolbar)findViewById(R.id.toobar);
-        toolbar.setTitle("登录");
+        toolbar.setTitle("登录");//更改title
         setSupportActionBar(toolbar);
-
         intview();
     }
+    //获取控件
     private void intview(){
         username =(TextView)findViewById(R.id.username);
         userpw =(TextView)findViewById(R.id.userpw);
@@ -66,24 +67,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.clear:
+            case R.id.clear://清除按钮 点击清空
                 username.setText("");
                 userpw.setText("");
                 break;
-            case R.id.login:
+            case R.id.login://登录事件
                 final String name =username.getText().toString().trim();
                 final String pw = userpw.getText().toString().trim();
                 new Thread(new Runnable() {
                     @Override
-                    public void run() {
+                    public void run() {//子线程中进行验证操作
                         connection = SqlHelper.openConnection();
                         try{
                             statement =connection.createStatement();
                             resultSet = statement.executeQuery("SELECT * FROM student WHERE studentID = '" + name + "'");
-                            if(resultSet.next()){
+                            if(resultSet.next()){//获取数据库中用户名密码
                                 String sqlpw = resultSet.getString("password");
                                 String name1 = resultSet.getString("name");
-                                if(pw.equals(sqlpw)){
+                                if(pw.equals(sqlpw)){//验证密码
                                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                     intent.putExtra("name_e",name1);
                                     intent.putExtra("id_e",name);
@@ -105,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }).start();
                 break;
-            case R.id.register:
+            case R.id.register://注册按钮事件
                 Intent intent =new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
                 break;

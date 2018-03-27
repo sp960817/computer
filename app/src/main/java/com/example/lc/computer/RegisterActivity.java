@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         StrictMode.setThreadPolicy(policy);
         intview();
     }
+    //获取控件
     private void intview(){
         register = (Button)findViewById(R.id.register);
         r_return =(Button)findViewById(R.id.r_retrun);
@@ -58,14 +59,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         register.setOnClickListener(this);
         r_return.setOnClickListener(this);
     }
-
+    //点击事件
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.r_retrun:
+            case R.id.r_retrun://返回事件
                 finish();
                 break;
-            case R.id.register:
+            case R.id.register://注册事件
                 final String u_id = id.getText().toString().trim();
                 final String u_name = name.getText().toString().trim();
                 final String u_class = r_class.getText().toString().trim();
@@ -110,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }).start();*/
                 Connection connection= SqlHelper.openConnection();
-                try{
+                try{//数据写入数据库
                     Statement statement=connection.createStatement();
                     Log.d(TAG, u_id);
                     ResultSet resultSet = statement.executeQuery("SELECT * FROM student WHERE studentID ='"+u_id+"'");

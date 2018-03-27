@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //初始化分数
         o_grade=0;
         m_grade=0;
         j_grade=0;
@@ -31,21 +32,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         name =intent.getStringExtra("name_e");
-        replaceFragment(new FirstFragment());
+        replaceFragment(new FirstFragment());//更换初始化页面
     }
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment){//碎片更换
         FragmentManager manager =getSupportFragmentManager();
         FragmentTransaction transaction =manager.beginTransaction();
         transaction.replace(R.id.main_view,fragment);
         transaction.commit();
     }
-    public void Changefragment(Fragment fragment){
+    public void Changefragment(Fragment fragment){//碎片更换
         FragmentManager manager =getSupportFragmentManager();
         FragmentTransaction transaction =manager.beginTransaction();
         transaction.replace(R.id.main_view,fragment);
         transaction.commit();
     }
-
+    //主函数写入public函数 对分数，id进行更改，获取
     public String getName(){
         return name;
     }

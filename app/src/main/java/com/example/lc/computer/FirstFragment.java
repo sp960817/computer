@@ -27,7 +27,6 @@ import ex.SqlHelper;
  */
 
 public class FirstFragment extends Fragment {
-    private OcDatabase dbHelper;
     int[] nu;
     Connection connection;
     Statement statement;
@@ -38,15 +37,14 @@ public class FirstFragment extends Fragment {
         View view=inflater.inflate(R.layout.first_fragment,container,false);
         TextView welcome =(TextView)view.findViewById(R.id.welcometext);
         StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        StrictMode.setThreadPolicy(policy);//允许主线程访问网络
         String name =((MainActivity)getActivity()).getName();
         welcome.setText("欢迎你，"+name);
-
-        nu = com.example.lc.computer.Random.randomCommon(1,11,5);
+        nu = com.example.lc.computer.Random.randomCommon(1,11,5);//随机数组
         Button ok=(Button)view.findViewById(R.id.ok);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//初始化试题 随机获取试题
                 LitePal.getDatabase();
                 DataSupport.deleteAll(OC.class);
                 DataSupport.deleteAll(MC.class);
@@ -150,6 +148,7 @@ public class FirstFragment extends Fragment {
 
         }
     }
+    //获取天空
     private void getGapfilling(){
         String a_subject =null,a_answer=null;
         connection =SqlHelper.openConnection();
