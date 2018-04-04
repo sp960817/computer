@@ -26,7 +26,13 @@
             android:id="@+id/ok"
             android:text="生成试题并测试"
             android:layout_alignParentTop="true"/>
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/see_grade"
+            android:text="查看历史成绩"
+            />
     </RelativeLayout>
 
 </LinearLayout>

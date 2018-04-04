@@ -55,6 +55,13 @@ public class FirstFragment extends Fragment {
                 ((MainActivity)getActivity()).Changefragment(new OnlyChooseFragement());
             }
         });
+        Button see_grade =(Button)view.findViewById(R.id.see_grade);
+        see_grade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).Changefragment(new SeeGradeFragement());
+            }
+        });
         return view;
     }
     //获取单选题
@@ -148,7 +155,7 @@ public class FirstFragment extends Fragment {
 
         }
     }
-    //获取天空
+    //获取填空
     private void getGapfilling(){
         String a_subject =null,a_answer=null;
         connection =SqlHelper.openConnection();
