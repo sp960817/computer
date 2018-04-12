@@ -23,7 +23,7 @@ import ex.SqlHelper;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     TextView username,userpw;
-    Button login,clear,register;
+    Button login,clear,register,forget;
     Connection connection;
     ResultSet resultSet;
     Statement statement;
@@ -60,6 +60,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         login = (Button)findViewById(R.id.login);
         clear =(Button)findViewById(R.id.clear);
         register = (Button)findViewById(R.id.register);
+        forget=(Button)findViewById(R.id.forget_pwd);
+        forget.setOnClickListener(this);
         login.setOnClickListener(this);
         clear.setOnClickListener(this);
         register.setOnClickListener(this);
@@ -109,6 +111,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.register://注册按钮事件
                 Intent intent =new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.forget_pwd:
+                Intent intent1=new Intent(LoginActivity.this,ForgetActivity.class);
+                startActivity(intent1);
                 break;
             default:
                     break;
