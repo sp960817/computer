@@ -5,7 +5,7 @@ import org.litepal.crud.DataSupport;
 /**
  * Created by sp on 2018/3/14.
  */
-
+//判断本地SQLLite数据库
 public class JUDGE extends DataSupport {
     private int idid;
     private String subject;

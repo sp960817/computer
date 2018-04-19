@@ -25,11 +25,11 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget);
-        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        /*StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);*/
         intview();
     }
-    private void intview(){
+    private void intview(){//初始化页面
         forget_id =(EditText)findViewById(R.id.forget_id);
         forget_name =(EditText)findViewById(R.id.forget_name);
         forget_password =(Button)findViewById(R.id.getpassowrd);
@@ -40,12 +40,12 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()){//获取密码事件
             case R.id.getpassowrd:
                 String name=null,password = null;
                 String id =forget_id.getText().toString();
                 String Fname =forget_name.getText().toString().trim();
-                connection = SqlHelper.openConnection();
+                connection = SqlHelper.openConnection();//连接数据库
                 try{
                     statement = connection.createStatement();
                     resultSet = statement.executeQuery("SELECT * FROM student WHERE studentID = "+id+"");

@@ -48,6 +48,8 @@ public class FirstFragment extends Fragment {
                 LitePal.getDatabase();
                 DataSupport.deleteAll(OC.class);
                 DataSupport.deleteAll(MC.class);
+                DataSupport.deleteAll(GAPFILLING.class);
+                DataSupport.deleteAll(JUDGE.class);
                 getOC();
                 getMC();
                 getJUDGE();

@@ -25,7 +25,7 @@ import ex.OcDatabase;
 /**
  * Created by sp on 2018/3/13.
  */
-
+//多选题碎片 Fragment
 public class ManyChooseFragment extends Fragment {
     TextView subject;
     CheckBox A,B,C,D;
@@ -40,7 +40,7 @@ public class ManyChooseFragment extends Fragment {
         i=2;
         grade=0;
         List<MC> mcs = DataSupport.where("idid = ?","1").find(MC.class);
-        for(MC mc:mcs){
+        for(MC mc:mcs){//初始化试题
             subject.setText("1."+mc.getSubject());
             A.setText(mc.getA());
             B.setText(mc.getB());
@@ -50,7 +50,7 @@ public class ManyChooseFragment extends Fragment {
         }
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//多选逻辑
                     if(A.isChecked()){
                         if (B.isChecked()){
                             if (C.isChecked()){
@@ -112,7 +112,7 @@ public class ManyChooseFragment extends Fragment {
                             }
                         }
                     }
-                if(i<6){
+                if(i<6){//前四题 回答完进入下一题
                     if(seleanswer.equals("")){
                         Toast.makeText(getContext(), "请填写", Toast.LENGTH_SHORT).show();
                     }else {
@@ -142,7 +142,7 @@ public class ManyChooseFragment extends Fragment {
                         seleanswer="";
                         i++;
                     }
-                }else {
+                }else {//最后一题回答完进入判断Fragment
                     if (answer.equals(seleanswer)) {
                         Toast.makeText(getContext(), "答对加5分", Toast.LENGTH_SHORT).show();
                         grade=grade+5;

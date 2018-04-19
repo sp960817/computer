@@ -6,7 +6,7 @@ import java.util.SimpleTimeZone;
 /**
  * Created by sp on 2018/3/13.
  */
-
+//多选本地数据库SQLLite
 public class MC extends DataSupport{
     private int idid;
     private String subject;

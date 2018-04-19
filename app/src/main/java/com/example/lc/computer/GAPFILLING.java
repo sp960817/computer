@@ -5,7 +5,7 @@ import org.litepal.crud.DataSupport;
 /**
  * Created by Administrator on 2018/3/17.
  */
-
+//填空题本地SQLLite数据库
 public class GAPFILLING extends DataSupport{
     private String subject,answer;
     private int idid;

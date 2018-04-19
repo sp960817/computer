@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by sp on 2018/3/14.
  */
-
+//多选题碎片Fragment
 public class JudgeFragment extends Fragment {
     TextView subject;
     RadioGroup radioGroup;
@@ -37,13 +37,13 @@ public class JudgeFragment extends Fragment {
         grade1=0;
         i=2;
         List<JUDGE> judges = DataSupport.where("idid = ?","1").find(JUDGE.class);
-        for (JUDGE judge:judges){
+        for (JUDGE judge:judges){//初始化试题
             subject.setText("1."+judge.getSubject());
             answer = judge.getAnswer();
         }
         sumbit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//判断按钮逻辑
                 RadioButton rb = (RadioButton) view.findViewById(radioGroup.getCheckedRadioButtonId());
                 if (rb!=null){
                     switch (rb.getId()){
@@ -57,7 +57,7 @@ public class JudgeFragment extends Fragment {
                 }else {
                     seleanswer = "";
                 }
-                if(i<6){
+                if(i<6){//前四题回答后进入下一题
                     if(seleanswer.equals("")){
                         Toast.makeText(getContext(),"请选择",Toast.LENGTH_SHORT).show();
                     }else {
@@ -78,7 +78,7 @@ public class JudgeFragment extends Fragment {
                         }
                         i++;
                     }
-                }else {
+                }else {//最后一题回答后进入填空题
                     if(seleanswer.equals(answer)){
                         Toast.makeText(getContext(),"答对加5分",Toast.LENGTH_SHORT).show();
                         grade1=grade1+5;

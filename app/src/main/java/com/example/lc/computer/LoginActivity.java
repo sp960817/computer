@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent =new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.forget_pwd:
+            case R.id.forget_pwd://忘记密码事件，进入ForgetActivity
                 Intent intent1=new Intent(LoginActivity.this,ForgetActivity.class);
                 startActivity(intent1);
                 break;

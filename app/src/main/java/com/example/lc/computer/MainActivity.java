@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.replace(R.id.main_view,fragment);
         transaction.commit();
     }
-    //主函数写入public函数 对分数，id进行更改，获取
+    //主Activity写入public函数 对分数，id进行更改，获取
     public String getName(){
         return name;
     }

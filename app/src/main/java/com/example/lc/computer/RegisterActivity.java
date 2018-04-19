@@ -25,19 +25,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     TextView id,name,r_class,password;
     public static final int ok =1,no=2;
     private String TAG="sss";
-    /*private Handler handler = new Handler(){
-        public void handlerMessage(Message message){
-            switch (message.what){
-                case ok:
-                    Toast.makeText(RegisterActivity.this,"注册成功,请返回",Toast.LENGTH_SHORT).show();
-                    break;
-                case no:
-                    Toast.makeText(RegisterActivity.this,"用户名已存在",Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    };*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,33 +70,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if(u_password.equals("")){
                     Toast.makeText(RegisterActivity.this,"密码不能为空",Toast.LENGTH_SHORT).show();
                 }
-               /*new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Connection connection= SqlHelper.openConnection();
-                        try{
-                            Statement statement=connection.createStatement();
-                            Log.d(TAG, u_id);
-                            ResultSet resultSet = statement.executeQuery("SELECT * FROM student WHERE studentID ='"+u_id+"'");
-                            if(resultSet.next()){
-                                Message message =new Message();
-                                message.what = no;
-                                handler.sendMessage(message);
-                            }else{
-                                Log.d(TAG, "2");
-                                int count = statement.executeUpdate("INSERT INTO student VALUES('1','1','1','1')");
-                                if (count>0){
-                                    Message message =new Message();
-                                    message.what = ok;
-                                    handler.sendMessage(message);
-                                }
-                            }
-                            connection.close();
-                        }catch (SQLException e){
-                            e.getNextException();
-                        }
-                    }
-                }).start();*/
                 Connection connection= SqlHelper.openConnection();
                 try{//数据写入数据库
                     Statement statement=connection.createStatement();

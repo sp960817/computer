@@ -37,11 +37,11 @@ public class SeeGradeFragement extends Fragment {
         getFruit();
         ListView listView = (ListView)view.findViewById(R.id.see_grade_list);
         adapter=new FruitAdapter(view.getContext(),R.layout.see_grade_list,fruits);
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);//listView绑定适配器
         adapter.notifyDataSetChanged();
         return view;
     }
-    private void getFruit(){
+    private void getFruit(){//从数据库中获取成绩
         try{
             connection = SqlHelper.openConnection();
             statement =connection.createStatement();

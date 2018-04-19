@@ -29,24 +29,12 @@ public class FinishFragment extends Fragment{
     TextView o_grade,m_grade,j_grade,g_grade,all_grade,finish1;
     Button finish;
     String id,name;
-    /*Handler handler =new Handler(){
-        public void handlerMessage(Message msg){
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 0:
-                    Toast.makeText(getContext(),"上传成功",Toast.LENGTH_SHORT).show();
-                    finish1.setVisibility(View.VISIBLE);
-                    break;
-                    default:
-                        break;
-            }
-        }
-    };*/
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.finish_fragment,container,false);
         intview(view);
+        //获取总成绩
         final int ograge = ((MainActivity)getActivity()).getO_grade();
         final int jgrade = ((MainActivity)getActivity()).getJ_grade();
         final int mgrade = ((MainActivity)getActivity()).getM_grade();
@@ -56,13 +44,14 @@ public class FinishFragment extends Fragment{
         name =((MainActivity)getActivity()).getName();
         SimpleDateFormat df =new SimpleDateFormat("yyyyMMddHHmm");
         final String testid =df.format(new Date());
+        //显示成绩
         o_grade.setText(Integer.toString(ograge));
         j_grade.setText(Integer.toString(jgrade));
         m_grade.setText(Integer.toString(mgrade));
         g_grade.setText(Integer.toString(ggrade));
         all_grade.setText(Integer.toString(allgrade));
         Connection connection = SqlHelper.openConnection();
-        try{
+        try{//上传成绩
             Statement statement =connection.createStatement();
             int count = statement.executeUpdate("INSERT INTO grade VALUES('"+testid+"','"+id+"','"+name+"'," +
                     "'"+ograge+"','"+mgrade+"','"+jgrade+"','"+ggrade+"','"+allgrade+"')");

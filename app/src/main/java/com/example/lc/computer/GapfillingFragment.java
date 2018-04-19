@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2018/3/17.
  */
-
+//填空题碎片 Fragment
 public class GapfillingFragment extends Fragment {
     TextView subject;
     Button sumbit;
@@ -43,6 +43,7 @@ public class GapfillingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(i<6){
+                    //前4次回答，进入下一题
                     if(seleanswer.getText().toString().trim().equals("")){
                         Toast.makeText(getContext(),"请选择",Toast.LENGTH_SHORT).show();
                     }else {
@@ -61,7 +62,7 @@ public class GapfillingFragment extends Fragment {
                         }
                         i++;
                     }
-                }else {
+                }else {//最后一次回答，进入结算Fragment
                     if(seleanswer.getText().toString().trim().equals(answer)){
                         Toast.makeText(getContext(),"答对加5分",Toast.LENGTH_SHORT).show();
                         grade1=grade1+5;

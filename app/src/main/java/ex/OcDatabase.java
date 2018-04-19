@@ -20,14 +20,6 @@ public class OcDatabase extends SQLiteOpenHelper {
             "C varchar," +
             "D varchar," +
             "answer varchar)";
-    public static final String CREARE_MC="create table mc(" +
-            "id integer primary key," +
-            "subject varchar," +
-            "A varchar," +
-            "B varchar," +
-            "C varchar," +
-            "D varchar," +
-            "answer varchar)";
     private Context mContext;
     public  OcDatabase(Context context,String name,SQLiteDatabase.CursorFactory factory,int version){
         super(context,name,factory,version);
@@ -36,7 +28,6 @@ public class OcDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_OC);
-        //db.execSQL(CREARE_MC);
         Toast.makeText(mContext,"生成成功!",Toast.LENGTH_SHORT).show();
     }
 

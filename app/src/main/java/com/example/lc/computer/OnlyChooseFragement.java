@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by sp on 2018/3/12.
  */
-
+//单选题Fragment
 public class OnlyChooseFragement extends Fragment {
     TextView subject;
     Button submit;
@@ -37,7 +37,7 @@ public class OnlyChooseFragement extends Fragment {
         grade1=0;
         i=2;
         List<OC> ocs = DataSupport.where("idid = ?","1").find(OC.class);
-        for(OC oc:ocs){
+        for(OC oc:ocs){//初始化试题
                 subject.setText("1."+oc.getSubject());
                 A.setText(oc.getA());
                 B.setText(oc.getB());
@@ -47,7 +47,7 @@ public class OnlyChooseFragement extends Fragment {
         }
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//单选逻辑
                 RadioButton rb = (RadioButton) view.findViewById(radioGroup.getCheckedRadioButtonId());
                 if (rb != null) {
                     switch (rb.getId()) {
@@ -67,7 +67,7 @@ public class OnlyChooseFragement extends Fragment {
                 } else {
                     seleanswer = "";
                 }
-                if (i < 6) {
+                if (i < 6) {//前四题回答完进入下一题
                     if (seleanswer.equals("")) {
                         Toast.makeText(getContext(), "请选择", Toast.LENGTH_SHORT).show();
                     } else {
@@ -93,7 +93,7 @@ public class OnlyChooseFragement extends Fragment {
                         i++;
                     }
 
-                } else {
+                } else {//最后一题回答完进入多选题Fragment
                     if (answer.equals(seleanswer)) {
                         Toast.makeText(getContext(), "答对加5分", Toast.LENGTH_SHORT).show();
                         grade1 = grade1 + 5;
@@ -110,7 +110,7 @@ public class OnlyChooseFragement extends Fragment {
         });
         return view;
     }
-    private void intview(View view) {
+    private void intview(View view) {//初始化控件
         subject = (TextView)view.findViewById(R.id.subject);
         A =(RadioButton)view.findViewById(R.id.only_A);
         B =(RadioButton)view.findViewById(R.id.only_B);

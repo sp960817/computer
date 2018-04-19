@@ -3,7 +3,7 @@ package ex;
 /**
  * Created by sp on 2018/4/2.
  */
-
+//成绩数据组
 public class Fruit {
     private String testid,g1,g2,g3,g4,gg;
     public Fruit(String testtid,String g1,String g2,String g3,String g4,String gg){
