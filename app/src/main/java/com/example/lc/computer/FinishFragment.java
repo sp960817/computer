@@ -42,8 +42,8 @@ public class FinishFragment extends Fragment{
         final int allgrade =((MainActivity)getActivity()).getAllgrade();
         id =((MainActivity)getActivity()).getId();
         name =((MainActivity)getActivity()).getName();
-        SimpleDateFormat df =new SimpleDateFormat("yyyyMMddHHmm");
-        final String testid =df.format(new Date());
+        SimpleDateFormat df =new SimpleDateFormat("MMddHH");
+        final String testid =df.format(new Date())+id;
         //显示成绩
         o_grade.setText(Integer.toString(ograge));
         j_grade.setText(Integer.toString(jgrade));

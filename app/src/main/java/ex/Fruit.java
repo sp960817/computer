@@ -6,7 +6,7 @@ package ex;
 //成绩数据组
 public class Fruit {
     private String testid,g1,g2,g3,g4,gg;
-    public Fruit(String testtid,String g1,String g2,String g3,String g4,String gg){
+    public Fruit(String testid,String g1,String g2,String g3,String g4,String gg){
         this.g1=g1;
         this.testid=testid;
         this.g2=g2;
