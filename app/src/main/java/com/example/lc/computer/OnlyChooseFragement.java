@@ -94,17 +94,22 @@ public class OnlyChooseFragement extends Fragment {
                     }
 
                 } else {//最后一题回答完进入多选题Fragment
-                    if (answer.equals(seleanswer)) {
-                        Toast.makeText(getContext(), "答对加5分", Toast.LENGTH_SHORT).show();
-                        grade1 = grade1 + 5;
-                        radioGroup.clearCheck();
-                    } else {
-                        Toast.makeText(getContext(), "回答错误", Toast.LENGTH_SHORT).show();
-                        radioGroup.clearCheck();
+                    if (seleanswer.equals("")) {
+                        Toast.makeText(getContext(), "请选择", Toast.LENGTH_SHORT).show();
+                    }else{
+                        if (answer.equals(seleanswer)) {
+                            Toast.makeText(getContext(), "答对加5分", Toast.LENGTH_SHORT).show();
+                            grade1 = grade1 + 5;
+                            radioGroup.clearCheck();
+                        } else {
+                            Toast.makeText(getContext(), "回答错误", Toast.LENGTH_SHORT).show();
+                            radioGroup.clearCheck();
+                        }
+                        ((MainActivity) getActivity()).setO_grade(grade1);
+                        ((MainActivity) getActivity()).Changefragment(new ManyChooseFragment());
+                        Log.d("sss", Integer.toString(((MainActivity) getActivity()).getO_grade()));
                     }
-                    ((MainActivity) getActivity()).setO_grade(grade1);
-                    ((MainActivity) getActivity()).Changefragment(new ManyChooseFragment());
-                    Log.d("sss", Integer.toString(((MainActivity) getActivity()).getO_grade()));
+
                 }
             }
         });

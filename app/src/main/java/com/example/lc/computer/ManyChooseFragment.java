@@ -143,15 +143,20 @@ public class ManyChooseFragment extends Fragment {
                         i++;
                     }
                 }else {//最后一题回答完进入判断Fragment
-                    if (answer.equals(seleanswer)) {
-                        Toast.makeText(getContext(), "答对加5分", Toast.LENGTH_SHORT).show();
-                        grade=grade+5;
-                    } else {
-                        Toast.makeText(getContext(), "回答错误", Toast.LENGTH_SHORT).show();
+                    if(seleanswer.equals("")){
+                        Toast.makeText(getContext(), "请填写", Toast.LENGTH_SHORT).show();
+                    }else {
+                        if (answer.equals(seleanswer)) {
+                            Toast.makeText(getContext(), "答对加5分", Toast.LENGTH_SHORT).show();
+                            grade=grade+5;
+                        } else {
+                            Toast.makeText(getContext(), "回答错误", Toast.LENGTH_SHORT).show();
+                        }
+                        ((MainActivity) getActivity()).setM_grade(grade);
+                        ((MainActivity)getActivity()).Changefragment(new JudgeFragment());
+                        Log.d("sss", Integer.toString(((MainActivity) getActivity()).getM_grade()));
                     }
-                    ((MainActivity) getActivity()).setM_grade(grade);
-                    ((MainActivity)getActivity()).Changefragment(new JudgeFragment());
-                    Log.d("sss", Integer.toString(((MainActivity) getActivity()).getM_grade()));
+
                 }
 
             }

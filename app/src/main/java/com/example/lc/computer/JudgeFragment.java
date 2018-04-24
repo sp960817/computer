@@ -79,7 +79,10 @@ public class JudgeFragment extends Fragment {
                         i++;
                     }
                 }else {//最后一题回答后进入填空题
-                    if(seleanswer.equals(answer)){
+                    if(seleanswer.equals("")){
+                        Toast.makeText(getContext(),"请选择",Toast.LENGTH_SHORT).show();
+                    }else {
+                        if(seleanswer.equals(answer)){
                         Toast.makeText(getContext(),"答对加5分",Toast.LENGTH_SHORT).show();
                         grade1=grade1+5;
                         seleanswer = "";
@@ -89,9 +92,12 @@ public class JudgeFragment extends Fragment {
                         seleanswer = "";
                         radioGroup.clearCheck();
                     }
-                    ((MainActivity)getActivity()).setJ_grade(grade1);
-                    ((MainActivity)getActivity()).Changefragment(new GapfillingFragment());
-                    Log.d("sss", Integer.toString(((MainActivity)getActivity()).getJ_grade()));
+                        ((MainActivity)getActivity()).setJ_grade(grade1);
+                        ((MainActivity)getActivity()).Changefragment(new GapfillingFragment());
+                        Log.d("sss", Integer.toString(((MainActivity)getActivity()).getJ_grade()));
+                    }
+
+
                 }
             }
         });
