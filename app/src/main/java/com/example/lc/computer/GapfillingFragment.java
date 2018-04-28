@@ -34,7 +34,8 @@ public class GapfillingFragment extends Fragment {
         intview(view);
         grade1=0;
         i=2;
-        List<GAPFILLING> gapfillings = DataSupport.where("id = ?","1").find(GAPFILLING.class);
+        final int max=((MainActivity)getActivity()).getG_n();
+        List<GAPFILLING> gapfillings = DataSupport.where("idid = ?","1").find(GAPFILLING.class);
         for(GAPFILLING gapfilling:gapfillings){
             subject.setText("1."+gapfilling.getSubject());
             answer =gapfilling.getAnswer();
@@ -42,14 +43,14 @@ public class GapfillingFragment extends Fragment {
         sumbit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(i<6){
+                if(i<=max){
                     //前4次回答，进入下一题
                     if(seleanswer.getText().toString().trim().equals("")){
                         Toast.makeText(getContext(),"请选择",Toast.LENGTH_SHORT).show();
                     }else {
                         if(seleanswer.getText().toString().trim().equals(answer)){
-                            Toast.makeText(getContext(),"答对加5分",Toast.LENGTH_SHORT).show();
-                            grade1=grade1+5;
+                            Toast.makeText(getContext(),"答对加分",Toast.LENGTH_SHORT).show();
+                            grade1=grade1+1;
                             seleanswer.setText("");
                         }else {
                             Toast.makeText(getContext(), "回答错误", Toast.LENGTH_SHORT).show();
@@ -68,7 +69,7 @@ public class GapfillingFragment extends Fragment {
                     }else {
                         if(seleanswer.getText().toString().trim().equals(answer)){
                             Toast.makeText(getContext(),"答对加5分",Toast.LENGTH_SHORT).show();
-                            grade1=grade1+5;
+                            grade1=grade1+1;
                             seleanswer.setText("");
                         }else {
                             Toast.makeText(getContext(), "回答错误", Toast.LENGTH_SHORT).show();

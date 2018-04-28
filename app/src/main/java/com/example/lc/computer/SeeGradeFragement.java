@@ -49,7 +49,7 @@ public class SeeGradeFragement extends Fragment {
             resultSet =statement.executeQuery("SELECT * FROM grade WHERE studentID ='"+idid+"'");
             while(resultSet.next()){
                 Log.d("sss", resultSet.getString("testID"));
-                fruits.add(new Fruit(resultSet.getString("testID"),resultSet.getString("gapfilling"),resultSet.getString("judge"),resultSet.getString("only_choose"),resultSet.getString("many_choose"),resultSet.getString("grade")));
+                fruits.add(new Fruit(resultSet.getString("testID"),resultSet.getString("only_choose"),resultSet.getString("many_choose"),resultSet.getString("gapfilling"),resultSet.getString("judge"),resultSet.getString("grade")));
             }
             resultSet.close();
             connection.close();

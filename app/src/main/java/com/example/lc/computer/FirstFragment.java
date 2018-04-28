@@ -19,7 +19,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import ex.OcDatabase;
 import ex.SqlHelper;
 
 /**
@@ -28,20 +27,22 @@ import ex.SqlHelper;
 
 public class FirstFragment extends Fragment {
     int[] nu;
+    int o_max,m_max,g_max,j_max;
+    int o_n,j_n,g_n,m_n;
     Connection connection;
     Statement statement;
     ResultSet resultSet;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.first_fragment,container,false);
-        TextView welcome =(TextView)view.findViewById(R.id.welcometext);
-        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        View view = inflater.inflate(R.layout.first_fragment, container, false);
+        TextView welcome = (TextView) view.findViewById(R.id.welcometext);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);//允许主线程访问网络
-        String name =((MainActivity)getActivity()).getName();
-        welcome.setText("欢迎你，"+name);
-        nu = com.example.lc.computer.Random.randomCommon(1,11,5);//随机数组
-        Button ok=(Button)view.findViewById(R.id.ok);
+        String name = ((MainActivity) getActivity()).getName();
+        welcome.setText("欢迎你，" + name);
+        final Button ok = (Button) view.findViewById(R.id.ok);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//初始化试题 随机获取试题
@@ -54,39 +55,43 @@ public class FirstFragment extends Fragment {
                 getMC();
                 getJUDGE();
                 getGapfilling();
-                ((MainActivity)getActivity()).Changefragment(new OnlyChooseFragement());
+
+                ((MainActivity) getActivity()).Changefragment(new OnlyChooseFragement());
             }
         });
-        Button see_grade =(Button)view.findViewById(R.id.see_grade);
+        Button see_grade = (Button) view.findViewById(R.id.see_grade);
         see_grade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).Changefragment(new SeeGradeFragement());
+                ((MainActivity) getActivity()).Changefragment(new SeeGradeFragement());
             }
         });
         return view;
     }
+
     //获取单选题
-    private void getOC(){
-        String a_subject=null,a_A = null,a_B=null,a_C=null,a_D=null,a_answer=null;
+    private void getOC() {
+        o_max = GetMax("only_choose");
+        o_n =GetN("only_choose");
+        ((MainActivity)getActivity()).setO_n(o_n);
+
+        nu =Random.randomCommon(1,o_max,o_n);
+        String a_subject = null, a_A = null, a_B = null, a_C = null, a_D = null, a_answer = null;
         connection = SqlHelper.openConnection();
         try {
-            statement =connection.createStatement();
-            for(int i=0;i<5;i++){
-                Log.d("sss",Integer.toString(nu[i]));
-            }
-            OC oc =new OC();
-            for(int j=0;j<5;j++){
-                resultSet =statement.executeQuery("SELECT * FROM only_choose WHERE id = '"+nu[j]+"'");
-                if (resultSet.next()){
-                    a_subject =resultSet.getString("subject");
-                    a_A =resultSet.getString("A");
-                    a_B =resultSet.getString("B");
-                    a_C =resultSet.getString("C");
-                    a_D =resultSet.getString("D");
-                    a_answer=resultSet.getString("answer");
+            statement = connection.createStatement();
+            OC oc = new OC();
+            for (int j = 0; j < o_n; j++) {
+                resultSet = statement.executeQuery("SELECT * FROM only_choose WHERE id = '" + nu[j] + "'");
+                if (resultSet.next()) {
+                    a_subject = resultSet.getString("subject");
+                    a_A = resultSet.getString("A");
+                    a_B = resultSet.getString("B");
+                    a_C = resultSet.getString("C");
+                    a_D = resultSet.getString("D");
+                    a_answer = resultSet.getString("answer");
                 }
-                oc.setIdid(j+1);
+                oc.setIdid(j + 1);
                 oc.setSubject(a_subject);
                 oc.setA(a_A);
                 oc.setB(a_B);
@@ -95,55 +100,65 @@ public class FirstFragment extends Fragment {
                 oc.setAnswer(a_answer);
                 oc.save();
                 oc.clearSavedState();
-                Log.d("sss", "增加题"+nu[j]);
+                Log.d("sss", "增加题" + nu[j]);
 
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
         }
     }
+
     //获取判断题
-    private void getJUDGE(){
-        String a_subject =null,a_answer=null;
-        connection =SqlHelper.openConnection();
+    private void getJUDGE() {
+        j_max= GetMax("judge");
+        j_n =GetN("judge");
+        ((MainActivity)getActivity()).setM_n(m_n);
+        ((MainActivity)getActivity()).setJ_n(j_n);
+        nu =Random.randomCommon(1,j_max,j_n);
+        String a_subject = null, a_answer = null;
+        connection = SqlHelper.openConnection();
         try {
-            JUDGE judge =new JUDGE();
-            statement =connection.createStatement();
-            for(int j = 0; j<5;j++){
-                resultSet =statement.executeQuery("SELECT * FROM judge WHERE id = '"+nu[j]+"'");
-                if(resultSet.next()){
-                    a_subject=resultSet.getString("subject");
-                    a_answer =resultSet.getString("answer");
+            JUDGE judge = new JUDGE();
+            statement = connection.createStatement();
+            for (int j = 0; j < j_n; j++) {
+                resultSet = statement.executeQuery("SELECT * FROM judge WHERE id = '" + nu[j] + "'");
+                if (resultSet.next()) {
+                    a_subject = resultSet.getString("subject");
+                    a_answer = resultSet.getString("answer");
                 }
-                judge.setIdid(j+1);
+                judge.setIdid(j + 1);
                 judge.setSubject(a_subject);
                 judge.setAnswer(a_answer);
                 judge.save();
                 judge.clearSavedState();
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
         }
     }
+
     //获取多选题
-    private void getMC(){
-        String a_subject=null,a_A = null,a_B=null,a_C=null,a_D=null,a_answer=null;
+    private void getMC() {
+        m_max = GetMax("many_choose");
+        m_n =GetN("many_choose");
+        nu =Random.randomCommon(1,m_max,m_n);
+        String a_subject = null, a_A = null, a_B = null, a_C = null, a_D = null, a_answer = null;
         connection = SqlHelper.openConnection();
         try {
-            MC mc =new MC();
-            statement =connection.createStatement();
-            for(int j=0;j<5;j++){
-                resultSet =statement.executeQuery("SELECT * FROM many_choose WHERE id = '"+nu[j]+"'");
-                if (resultSet.next()){
-                    a_subject =resultSet.getString("subject");
-                    a_A =resultSet.getString("A");
-                    a_B =resultSet.getString("B");
-                    a_C =resultSet.getString("C");
-                    a_D =resultSet.getString("D");
-                    a_answer=resultSet.getString("answer");
+            MC mc = new MC();
+            statement = connection.createStatement();
+            for (int j = 0; j < m_n; j++) {
+                resultSet = statement.executeQuery("SELECT * FROM many_choose WHERE id = '" + nu[j] + "'");
+                if (resultSet.next()) {
+                    a_subject = resultSet.getString("subject");
+                    a_A = resultSet.getString("A");
+                    a_B = resultSet.getString("B");
+                    a_C = resultSet.getString("C");
+                    a_D = resultSet.getString("D");
+                    a_answer = resultSet.getString("answer");
                 }
-                mc.setIdid(j+1);
+                mc.setIdid(j + 1);
                 mc.setSubject(a_subject);
                 mc.setA(a_A);
                 mc.setB(a_B);
@@ -153,31 +168,68 @@ public class FirstFragment extends Fragment {
                 mc.save();
                 mc.clearSavedState();
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
         }
     }
+
     //获取填空
-    private void getGapfilling(){
-        String a_subject =null,a_answer=null;
-        connection =SqlHelper.openConnection();
+    private void getGapfilling() {
+        g_max = GetMax("gapfilling");
+        g_n =GetN("gapfilling");
+        ((MainActivity)getActivity()).setG_n(g_n);
+        nu =Random.randomCommon(1,g_max,g_n);
+        String a_subject = null, a_answer = null;
+        connection = SqlHelper.openConnection();
         try {
-            GAPFILLING gapfilling =new GAPFILLING();
-            statement =connection.createStatement();
-            for(int j = 0; j<5;j++){
-                resultSet =statement.executeQuery("SELECT * FROM gapfilling WHERE id = '"+nu[j]+"'");
-                if(resultSet.next()){
-                    a_subject=resultSet.getString("subject");
-                    a_answer =resultSet.getString("answer");
+            GAPFILLING gapfilling = new GAPFILLING();
+            statement = connection.createStatement();
+            for (int j = 0; j < g_n; j++) {
+                resultSet = statement.executeQuery("SELECT * FROM gapfilling WHERE id = '" + nu[j] + "'");
+                if (resultSet.next()) {
+                    a_subject = resultSet.getString("subject");
+                    a_answer = resultSet.getString("answer");
                 }
-                gapfilling.setIdid(j+1);
+                gapfilling.setIdid(j + 1);
                 gapfilling.setSubject(a_subject);
                 gapfilling.setAnswer(a_answer);
                 gapfilling.save();
                 gapfilling.clearSavedState();
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
 
         }
     }
+
+    private int GetN(String xx) {
+        connection = SqlHelper.openConnection();
+        int  n = 0;
+        try {
+            statement = connection.createStatement();
+            String mysql = "SELECT " + xx + " FROM test_number";
+            resultSet = statement.executeQuery(mysql);
+            if (resultSet.next()) {
+                n = resultSet.getInt("" + xx + "");
+                Log.d("sss",Integer.toString(n));
+            }
+        } catch (SQLException e) {
+        }
+        return n;
+    }
+    private int GetMax(String xx){
+        connection = SqlHelper.openConnection();
+        int max = 5;
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT id FROM "+xx+" WHERE id = (SELECT MAX(id) FROM "+xx+")");
+            if (resultSet.next()) {
+                max = resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+        }
+        Log.d("sss", Integer.toString(max));
+        return max;
+    }
+
+
 }

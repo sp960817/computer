@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String name;
     String id ;
     int o_grade,m_grade,j_grade,g_grade;
+    int o_n,j_n,g_n,m_n,n_all;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,5 +90,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public int getAllgrade(){
         int allgrage =g_grade+j_grade+m_grade+o_grade;
         return allgrage;
+    }
+
+    public void setG_n(int g_n) {
+        this.g_n = g_n;
+    }
+
+    public void setJ_n(int j_n) {
+        this.j_n = j_n;
+    }
+
+    public void setM_n(int m_n) {
+        this.m_n = m_n;
+    }
+
+    public void setO_n(int o_n) {
+        this.o_n = o_n;
+    }
+
+    public int getO_n() {
+        return o_n;
+    }
+
+    public int getM_n() {
+        return m_n;
+    }
+
+    public int getJ_n() {
+        return j_n;
+    }
+
+    public int getG_n() {
+        return g_n;
+    }
+
+    public int getN_all() {
+        int n_all =g_n+j_n+m_n+o_n;
+        return n_all;
     }
 }

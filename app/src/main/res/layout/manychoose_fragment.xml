@@ -22,7 +22,6 @@
             android:layout_height="90dp"
             android:maxLines="4"
             android:id="@+id/subject"
-            android:text="题目题目"
             android:textSize="20dp" />
     </LinearLayout>
     <LinearLayout

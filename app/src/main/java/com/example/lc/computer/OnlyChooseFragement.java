@@ -36,6 +36,7 @@ public class OnlyChooseFragement extends Fragment {
         intview(view);
         grade1=0;
         i=2;
+        final int max =((MainActivity)getActivity()).getO_n();
         List<OC> ocs = DataSupport.where("idid = ?","1").find(OC.class);
         for(OC oc:ocs){//初始化试题
                 subject.setText("1."+oc.getSubject());
@@ -67,13 +68,13 @@ public class OnlyChooseFragement extends Fragment {
                 } else {
                     seleanswer = "";
                 }
-                if (i < 6) {//前四题回答完进入下一题
+                if (i <=max) {//前四题回答完进入下一题
                     if (seleanswer.equals("")) {
                         Toast.makeText(getContext(), "请选择", Toast.LENGTH_SHORT).show();
                     } else {
                         if (answer.equals(seleanswer)) {
-                            Toast.makeText(getContext(), "答对加5分", Toast.LENGTH_SHORT).show();
-                            grade1 = grade1 + 5;
+                            Toast.makeText(getContext(), "答对加分", Toast.LENGTH_SHORT).show();
+                            grade1 = grade1 + 1;
                             radioGroup.clearCheck();
                             seleanswer = "";
                         } else {
@@ -98,8 +99,8 @@ public class OnlyChooseFragement extends Fragment {
                         Toast.makeText(getContext(), "请选择", Toast.LENGTH_SHORT).show();
                     }else{
                         if (answer.equals(seleanswer)) {
-                            Toast.makeText(getContext(), "答对加5分", Toast.LENGTH_SHORT).show();
-                            grade1 = grade1 + 5;
+                            Toast.makeText(getContext(), "答对加分", Toast.LENGTH_SHORT).show();
+                            grade1 = grade1 + 1;
                             radioGroup.clearCheck();
                         } else {
                             Toast.makeText(getContext(), "回答错误", Toast.LENGTH_SHORT).show();

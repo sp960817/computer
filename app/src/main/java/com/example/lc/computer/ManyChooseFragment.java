@@ -39,6 +39,7 @@ public class ManyChooseFragment extends Fragment {
         getview(view);
         i=2;
         grade=0;
+        final int max =((MainActivity)getActivity()).getM_n();
         List<MC> mcs = DataSupport.where("idid = ?","1").find(MC.class);
         for(MC mc:mcs){//初始化试题
             subject.setText("1."+mc.getSubject());
@@ -112,13 +113,13 @@ public class ManyChooseFragment extends Fragment {
                             }
                         }
                     }
-                if(i<6){//前四题 回答完进入下一题
+                if(i<=max){//前四题 回答完进入下一题
                     if(seleanswer.equals("")){
                         Toast.makeText(getContext(), "请填写", Toast.LENGTH_SHORT).show();
                     }else {
                         if (answer.equals(seleanswer)) {
-                            Toast.makeText(getContext(), "答对加5分", Toast.LENGTH_SHORT).show();
-                            grade=grade+5;
+                            Toast.makeText(getContext(), "答对加分", Toast.LENGTH_SHORT).show();
+                            grade=grade+1;
                             A.setChecked(false);
                             B.setChecked(false);
                             C.setChecked(false);
@@ -147,8 +148,8 @@ public class ManyChooseFragment extends Fragment {
                         Toast.makeText(getContext(), "请填写", Toast.LENGTH_SHORT).show();
                     }else {
                         if (answer.equals(seleanswer)) {
-                            Toast.makeText(getContext(), "答对加5分", Toast.LENGTH_SHORT).show();
-                            grade=grade+5;
+                            Toast.makeText(getContext(), "答对加分", Toast.LENGTH_SHORT).show();
+                            grade=grade+1;
                         } else {
                             Toast.makeText(getContext(), "回答错误", Toast.LENGTH_SHORT).show();
                         }

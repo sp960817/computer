@@ -36,6 +36,7 @@ public class JudgeFragment extends Fragment {
         intview(view);
         grade1=0;
         i=2;
+        final int max =((MainActivity)getActivity()).getJ_n();
         List<JUDGE> judges = DataSupport.where("idid = ?","1").find(JUDGE.class);
         for (JUDGE judge:judges){//初始化试题
             subject.setText("1."+judge.getSubject());
@@ -57,13 +58,13 @@ public class JudgeFragment extends Fragment {
                 }else {
                     seleanswer = "";
                 }
-                if(i<6){//前四题回答后进入下一题
+                if(i<=max){//前四题回答后进入下一题
                     if(seleanswer.equals("")){
                         Toast.makeText(getContext(),"请选择",Toast.LENGTH_SHORT).show();
                     }else {
                         if(seleanswer.equals(answer)){
-                            Toast.makeText(getContext(),"答对加5分",Toast.LENGTH_SHORT).show();
-                            grade1=grade1+5;
+                            Toast.makeText(getContext(),"答对加分",Toast.LENGTH_SHORT).show();
+                            grade1=grade1+1;
                             seleanswer = "";
                             radioGroup.clearCheck();
                         }else {
@@ -83,8 +84,8 @@ public class JudgeFragment extends Fragment {
                         Toast.makeText(getContext(),"请选择",Toast.LENGTH_SHORT).show();
                     }else {
                         if(seleanswer.equals(answer)){
-                        Toast.makeText(getContext(),"答对加5分",Toast.LENGTH_SHORT).show();
-                        grade1=grade1+5;
+                        Toast.makeText(getContext(),"答对加分",Toast.LENGTH_SHORT).show();
+                        grade1=grade1+1;
                         seleanswer = "";
                         radioGroup.clearCheck();
                     }else {

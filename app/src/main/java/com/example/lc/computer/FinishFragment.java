@@ -35,24 +35,25 @@ public class FinishFragment extends Fragment{
         View view=inflater.inflate(R.layout.finish_fragment,container,false);
         intview(view);
         //获取总成绩
-        final int ograge = ((MainActivity)getActivity()).getO_grade();
-        final int jgrade = ((MainActivity)getActivity()).getJ_grade();
-        final int mgrade = ((MainActivity)getActivity()).getM_grade();
-        final int ggrade = ((MainActivity)getActivity()).getG_grade();
-        final int allgrade =((MainActivity)getActivity()).getAllgrade();
+        float all_n =((MainActivity)getActivity()).getN_all();
+        final float ograge = (float)((MainActivity)getActivity()).getO_grade()/all_n*100;
+        final float jgrade = (float)((MainActivity)getActivity()).getJ_grade()/all_n*100;
+        final float mgrade = (float)((MainActivity)getActivity()).getM_grade()/all_n*100;
+        final float ggrade = (float)((MainActivity)getActivity()).getG_grade()/all_n*100;
+        final float allgrade =(float)((MainActivity)getActivity()).getAllgrade()/all_n*100;
         id =((MainActivity)getActivity()).getId();
         name =((MainActivity)getActivity()).getName();
-        SimpleDateFormat df =new SimpleDateFormat("MMddHH");
-        final String testid =df.format(new Date())+id;
+        SimpleDateFormat df =new SimpleDateFormat("yyMMddHHmm");
         //显示成绩
-        o_grade.setText(Integer.toString(ograge));
-        j_grade.setText(Integer.toString(jgrade));
-        m_grade.setText(Integer.toString(mgrade));
-        g_grade.setText(Integer.toString(ggrade));
-        all_grade.setText(Integer.toString(allgrade));
+        o_grade.setText(String.format("%.2f", ograge).toString());
+        j_grade.setText(String.format("%.2f", jgrade).toString());
+        m_grade.setText(String.format("%.2f", mgrade).toString());
+        g_grade.setText(String.format("%.2f", ggrade).toString());
+        all_grade.setText(String.format("%.2f", allgrade).toString());
         Connection connection = SqlHelper.openConnection();
         try{//上传成绩
             Statement statement =connection.createStatement();
+            String testid =df.format(new Date())+id;
             int count = statement.executeUpdate("INSERT INTO grade VALUES('"+testid+"','"+id+"','"+name+"'," +
                     "'"+ograge+"','"+mgrade+"','"+jgrade+"','"+ggrade+"','"+allgrade+"')");
             if (count>0){
@@ -62,7 +63,7 @@ public class FinishFragment extends Fragment{
         }catch (SQLException e){
 
         }
-        Log.d("sss", Integer.toString(allgrade));
+        Log.d("sss", String.valueOf(allgrade));
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
