@@ -68,7 +68,7 @@ public class OnlyChooseFragement extends Fragment {
                 } else {
                     seleanswer = "";
                 }
-                if (i <=max) {//前四题回答完进入下一题
+                if (i <=max) {//前几题回答完进入下一题
                     if (seleanswer.equals("")) {
                         Toast.makeText(getContext(), "请选择", Toast.LENGTH_SHORT).show();
                     } else {

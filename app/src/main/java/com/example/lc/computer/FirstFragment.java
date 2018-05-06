@@ -55,7 +55,6 @@ public class FirstFragment extends Fragment {
                 getMC();
                 getJUDGE();
                 getGapfilling();
-
                 ((MainActivity) getActivity()).Changefragment(new OnlyChooseFragement());
             }
         });
@@ -74,7 +73,6 @@ public class FirstFragment extends Fragment {
         o_max = GetMax("only_choose");
         o_n =GetN("only_choose");
         ((MainActivity)getActivity()).setO_n(o_n);
-
         nu =Random.randomCommon(1,o_max,o_n);
         String a_subject = null, a_A = null, a_B = null, a_C = null, a_D = null, a_answer = null;
         connection = SqlHelper.openConnection();
@@ -113,7 +111,7 @@ public class FirstFragment extends Fragment {
     private void getJUDGE() {
         j_max= GetMax("judge");
         j_n =GetN("judge");
-        ((MainActivity)getActivity()).setM_n(m_n);
+
         ((MainActivity)getActivity()).setJ_n(j_n);
         nu =Random.randomCommon(1,j_max,j_n);
         String a_subject = null, a_answer = null;
@@ -143,6 +141,7 @@ public class FirstFragment extends Fragment {
         m_max = GetMax("many_choose");
         m_n =GetN("many_choose");
         nu =Random.randomCommon(1,m_max,m_n);
+        ((MainActivity)getActivity()).setM_n(m_n);
         String a_subject = null, a_A = null, a_B = null, a_C = null, a_D = null, a_answer = null;
         connection = SqlHelper.openConnection();
         try {
