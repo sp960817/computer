@@ -43,7 +43,7 @@ public class FinishFragment extends Fragment{
         final float allgrade =(float)((MainActivity)getActivity()).getAllgrade()/all_n*100;
         id =((MainActivity)getActivity()).getId();
         name =((MainActivity)getActivity()).getName();
-        SimpleDateFormat df =new SimpleDateFormat("yyMMddHHmm");
+        SimpleDateFormat df =new SimpleDateFormat("MMddHHmmss");
         //显示成绩
         o_grade.setText(String.format("%.2f", ograge).toString());
         j_grade.setText(String.format("%.2f", jgrade).toString());
@@ -53,12 +53,20 @@ public class FinishFragment extends Fragment{
         Connection connection = SqlHelper.openConnection();
         try{//上传成绩
             Statement statement =connection.createStatement();
-            String testid =df.format(new Date())+id;
+            String testid =df.format(new Date());
             int count = statement.executeUpdate("INSERT INTO grade VALUES('"+testid+"','"+id+"','"+name+"'," +
                     "'"+ograge+"','"+mgrade+"','"+jgrade+"','"+ggrade+"','"+allgrade+"')");
             if (count>0){
                 Toast.makeText(getContext(),"上传成功",Toast.LENGTH_SHORT).show();
                 finish1.setVisibility(View.VISIBLE);
+            }else {
+                try {
+                    Thread.currentThread().sleep(1000);//阻断2秒
+                    statement.executeUpdate("INSERT INTO grade VALUES('"+testid+"','"+id+"','"+name+"'," +
+                            "'"+ograge+"','"+mgrade+"','"+jgrade+"','"+ggrade+"','"+allgrade+"')");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }catch (SQLException e){
 
