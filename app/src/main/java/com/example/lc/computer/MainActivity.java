@@ -41,6 +41,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.replace(R.id.main_view,fragment);
         transaction.commit();
     }
+    public void reFragment(Fragment fragment){//碎片更换
+        FragmentManager manager =getSupportFragmentManager();
+        FragmentTransaction transaction =manager.beginTransaction();
+        transaction.replace(R.id.main_view,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
     public void Changefragment(Fragment fragment){//碎片更换
         FragmentManager manager =getSupportFragmentManager();
         FragmentTransaction transaction =manager.beginTransaction();

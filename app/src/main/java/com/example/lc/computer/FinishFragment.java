@@ -61,7 +61,7 @@ public class FinishFragment extends Fragment{
                 finish1.setVisibility(View.VISIBLE);
             }else {
                 try {
-                    Thread.currentThread().sleep(1000);//阻断2秒
+                    Thread.currentThread().sleep(1000);//阻断1秒
                     statement.executeUpdate("INSERT INTO grade VALUES('"+testid+"','"+id+"','"+name+"'," +
                             "'"+ograge+"','"+mgrade+"','"+jgrade+"','"+ggrade+"','"+allgrade+"')");
                 } catch (InterruptedException e) {

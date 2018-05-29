@@ -55,14 +55,14 @@ public class FirstFragment extends Fragment {
                 getMC();
                 getJUDGE();
                 getGapfilling();
-                ((MainActivity) getActivity()).Changefragment(new OnlyChooseFragement());
+                ((MainActivity) getActivity()).reFragment(new OnlyChooseFragement());
             }
         });
         Button see_grade = (Button) view.findViewById(R.id.see_grade);
         see_grade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).Changefragment(new SeeGradeFragement());
+                ((MainActivity) getActivity()).reFragment(new SeeGradeFragement());
             }
         });
         return view;
