@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
@@ -18,6 +19,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import ex.SqlHelper;
 
@@ -36,7 +39,7 @@ public class FirstFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.first_fragment, container, false);
+        final View view = inflater.inflate(R.layout.first_fragment, container, false);
         TextView welcome = (TextView) view.findViewById(R.id.welcometext);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);//允许主线程访问网络
@@ -46,16 +49,22 @@ public class FirstFragment extends Fragment {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {//初始化试题 随机获取试题
-                LitePal.getDatabase();
-                DataSupport.deleteAll(OC.class);
-                DataSupport.deleteAll(MC.class);
-                DataSupport.deleteAll(GAPFILLING.class);
-                DataSupport.deleteAll(JUDGE.class);
-                getOC();
-                getMC();
-                getJUDGE();
-                getGapfilling();
-                ((MainActivity) getActivity()).reFragment(new OnlyChooseFragement());
+                int YZ =YZ(view);
+                if(YZ>0){
+                    Toast.makeText(view.getContext(),"今天已经做过试题了",Toast.LENGTH_LONG).show();
+                }else {
+                    LitePal.getDatabase();
+                    DataSupport.deleteAll(OC.class);
+                    DataSupport.deleteAll(MC.class);
+                    DataSupport.deleteAll(GAPFILLING.class);
+                    DataSupport.deleteAll(JUDGE.class);
+                    getOC();
+                    getMC();
+                    getJUDGE();
+                    getGapfilling();
+                    ((MainActivity) getActivity()).reFragment(new OnlyChooseFragement());
+                }
+
             }
         });
         Button see_grade = (Button) view.findViewById(R.id.see_grade);
@@ -67,7 +76,25 @@ public class FirstFragment extends Fragment {
         });
         return view;
     }
+    private int YZ(View view){
+        SimpleDateFormat df =new SimpleDateFormat("MMdd");
+        String time =df.format(new Date());
+        String id =((MainActivity)getActivity()).getId();
+        String mysql ="SELECT * FROM grade WHERE testid LIKE '"+time+"%' AND studentID = '"+id+"'";
+        connection =SqlHelper.openConnection();
+        try{
+            statement =connection.createStatement();
+            resultSet  =statement.executeQuery(mysql);
+            if(resultSet.next()){
 
+                return 1;
+            }else {
+                return 0;
+            }
+        }catch (SQLException e){
+            return 0;
+        }
+    }
     //获取单选题
     private void getOC() {
         o_max = GetMax("only_choose");
