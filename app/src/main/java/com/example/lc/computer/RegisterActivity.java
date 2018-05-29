@@ -60,15 +60,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 final String u_password =password.getText().toString().trim();
                 if(u_id.equals("")) {
                     Toast.makeText(RegisterActivity.this,"学号不能为空",Toast.LENGTH_SHORT).show();
+                    break;
                 }
                 if(u_name.equals("")){
                     Toast.makeText(RegisterActivity.this,"姓名不能为空",Toast.LENGTH_SHORT).show();
+                    break;
                 }
                 if(u_class.equals("")){
                     Toast.makeText(RegisterActivity.this,"班级不能为空",Toast.LENGTH_SHORT).show();
+                    break;
                 }
                 if(u_password.equals("")){
                     Toast.makeText(RegisterActivity.this,"密码不能为空",Toast.LENGTH_SHORT).show();
+                    break;
                 }
                 Connection connection= SqlHelper.openConnection();
                 try{//数据写入数据库
