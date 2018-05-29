@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kongzue.dialog.v2.DialogSettings;
+import com.kongzue.dialog.v2.MessageDialog;
+
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
 
@@ -51,7 +54,8 @@ public class FirstFragment extends Fragment {
             public void onClick(View v) {//初始化试题 随机获取试题
                 int YZ =YZ(view);
                 if(YZ>0){
-                    Toast.makeText(view.getContext(),"今天已经做过试题了",Toast.LENGTH_LONG).show();
+                    DialogSettings.type= DialogSettings.TYPE_MATERIAL;
+                    MessageDialog.show(v.getContext(),"提示","今天已经做过试题了");
                 }else {
                     LitePal.getDatabase();
                     DataSupport.deleteAll(OC.class);

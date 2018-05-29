@@ -28,4 +28,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation files('libs/mysql-connector-java-5.1.45-bin.jar')
+    implementation 'com.kongzue.dialog:dialog:2.1.9'
 }

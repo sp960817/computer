@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kongzue.dialog.v2.DialogSettings;
+import com.kongzue.dialog.v2.MessageDialog;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,8 +28,8 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget);
-        /*StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);*/
+        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         intview();
     }
     private void intview(){//初始化页面
@@ -53,7 +56,9 @@ public class ForgetActivity extends AppCompatActivity implements View.OnClickLis
                         name = resultSet.getString("name");
                         password = resultSet.getString("password");
                         if (Fname.equals(name)){
-                            Toast.makeText(this,"您的密码是"+ password +"",Toast.LENGTH_LONG).show();
+                            //Toast.makeText(this,"您的密码是"+ password +"",Toast.LENGTH_LONG).show();
+                            DialogSettings.type =DialogSettings.TYPE_MATERIAL;
+                            MessageDialog.show(this,"您的密码是",""+password+"");
                         }else {
                             Toast.makeText(this,"信息有误",Toast.LENGTH_LONG).show();
                         }
